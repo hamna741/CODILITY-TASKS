@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////
+
 
 #include<iostream>
 #include<vector>
@@ -17,20 +17,21 @@ int sum(std::vector<int> &vec){
     for(int size = 1; size <= vec.size(); size++){
       if(vec.size() % size != 0) 
       continue; //equal size of subarrays
-      int find = 0;
+      int g_count = 0;
       int groups = vec.size()/size;
       bool ok = true;
      
-      for(int peakIdx : peaks){
+      for(int p_index=0;p_index<peaks.size();p_index++){
        
-        if(peakIdx/size > find){
+        if(peaks[p_index]/size > g_count){
           ok = false;
           break;
         }
-        if(peakIdx/size == find) find++;
+        if(peaks[p_index]/size == g_count) 
+        g_count++;
    
       }
-      if(find != groups) ok = false;
+      if(g_count != groups) ok = false;
       if(ok) return groups;
     }
     return 0;
