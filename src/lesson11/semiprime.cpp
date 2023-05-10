@@ -5,7 +5,7 @@
 std::vector<int> semiprime(int N, std::vector<int> &P, std::vector<int> &Q) {
     std::vector<int> primes;
     std::vector<int> semiprimes(N+1, 0);
-//marking multiples of primes and storing prime nums in primes
+
     for (int i = 2; i <= N; i++) {
         if (semiprimes[i] == 0) {
             primes.push_back(i);
@@ -15,7 +15,7 @@ std::vector<int> semiprime(int N, std::vector<int> &P, std::vector<int> &Q) {
         }
     }
 
-    // Find all semiprimes
+
     std::vector<int> semiprime_count(N+1, 0);
     for (int i = 0; i < primes.size(); i++) {
         for (int j = i; j < primes.size(); j++) {
@@ -26,7 +26,6 @@ std::vector<int> semiprime(int N, std::vector<int> &P, std::vector<int> &Q) {
         }
     }
 
-    //prefix sum for range p to q
    std:: vector<int> semiprime_prefix_sum(N+1, 0);
     for (int i = 1; i <= N; i++) {
         semiprime_prefix_sum[i] = semiprime_prefix_sum[i-1] + semiprime_count[i];
@@ -52,9 +51,7 @@ std:: vector<int> vec;
 for(auto val:semiprime(N,P,Q))
 std::cout<<val;
 
-    
 
-   // std::cout<<"NUMBER OF PAIRS: "<<semiprime(N,P,Q)<<std::endl;
     
     return 0;
 
