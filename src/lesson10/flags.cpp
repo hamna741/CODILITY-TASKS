@@ -38,12 +38,6 @@ int sum(std::vector<int> &vec){
 
 
 
-
-
-
-
-
-
 int main(int argc, char* argv[]){
      if(argc<1){
         std::cout<<"INVALID INPUT!!";
