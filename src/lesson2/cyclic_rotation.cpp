@@ -1,40 +1,27 @@
+
+// you can use includes, for example:
+// #include <algorithm>
+
+// you can write to stdout for debugging purposes, e.g.
+// cout << "this is a debug message" << endl;
 #include<iostream>
-
-int main(int argc, char* argv[]){
- //int A[4]={1,2,3,4};
-if (argc<2)
-{
-   std::cout<<"INVALID INPUT"<<std::endl;
-   return 1;
-}
-else{
-    if (argc==2){
-        std::cout<<atoi(argv[1])<<std::endl;
-
+#include<vector>
+std::vector<int> solution(std::vector<int> &A, int K) {
+     if (K < 0) {
+        return A;
     }
-else{
- int A[argc - 2];
-
-    for(int i = 2; i < argc; i++) {
-        A[i-2 ] = atoi(argv[i]); 
+if (A.empty()) {
+        return A;
     }
-int k=atoi(argv[1]);
-    int temp;
-    
-for (int rot=0;rot<k;rot++){
-    temp=A[0];
-for (int index =0; index<sizeof(A)/4 ;index++){
-    if(index!=(sizeof(A)/4)-1){
-    A[index]=A[index+1];
+ 
+    for (int cycle = 0; cycle < K; cycle++) {
+   int last = A[A.size() - 1];
+    for (int index =A.size() - 2; index >= 0; index--) {
+        A[index + 1] = A[index];
     }
-    else
-    A[index]=temp;
-}
+ 
+    A[0] = last;
 }
 
-for (int i =0;i<sizeof(A)/4;i++)
-std::cout<<A[i]<<" ";
-}
-return 0;
-}
+return A;
 }
