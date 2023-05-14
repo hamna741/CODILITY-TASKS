@@ -48,7 +48,7 @@ CODILITY TASKS
 - [Ladder](https://app.codility.com/programmers/lessons/13-fibonacci_numbers/ladder/)
 
 ## Lesson 14
-- [MinMaxDivision](hhttps://app.codility.com/programmers/lessons/14-binary_search_algorithm/min_max_division/)
+- [MinMaxDivision](https://app.codility.com/programmers/lessons/14-binary_search_algorithm/min_max_division/)
 - [NailingPlanks](https://app.codility.com/programmers/lessons/14-binary_search_algorithm/nailing_planks/)
 
 ## Lesson 15 
