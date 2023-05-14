@@ -1,35 +1,32 @@
+// you can use includes, for example:
+// #include <algorithm>
+
+// you can write to stdout for debugging purposes, e.g.
+// cout << "this is a debug message" << endl;
 #include<iostream>
+#include <algorithm>
 #include<vector>
-int missing(std::vector<int> &vec){
-       
-int x1 = vec[0];
-  int x2 = 1;
-
-  for (int index = 1; index < vec.size()-1; index++)
-    x1 = x1 ^ vec[index];
-
-  for (int index = 2; index <=  vec.size()-1+ 1; index++) 
-    x2 = x2 ^ index;
-
-  return (x1 ^ x2);
-    }
-
-int main(int argc, char* argv[]){
-    if(argc<2){
-        std::cout<<"INVALID INPUT!!";
+int solution(std::vector<int> &A) {
+    
+    if( A.size() == 0 )
+    {
         return 1;
     }
-    else{
-
-std:: vector<int> vec;
-    for (int i = 1; i < argc; i++) {
-        int num = atoi(argv[i]); 
-        vec.push_back(num); 
-    }
-
     
-    std::cout<<"MISSING NUMBER = "<<missing(vec)<<std::endl;
+   
+    std::sort( A.begin(), A.end() );
+    
+    int num = 1;
+    
+    for( unsigned int i= 0; i < A.size(); i++ )
+    {
+        if( A[i] != num )
+        {
+            return num;
+        }
+        
+        num++;
     }
     
-    return 0;
+    return num;
 }

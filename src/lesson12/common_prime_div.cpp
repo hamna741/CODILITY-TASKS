@@ -1,8 +1,9 @@
-#include<iostream>
-#include <vector>
-#include <unordered_set>
-#include <algorithm>
+// you can use includes, for example:
+// #include <algorithm>
 
+// you can write to stdout for debugging purposes, e.g.
+// cout << "this is a debug message" << endl;
+#include<vector>
  int gcd(int a, int b){
         if(b == 0) 
             return a;
@@ -24,9 +25,9 @@ bool isdiv(int num, int g){
         }
     }
 
- int prime_diviors(std::vector<int>A, std::vector<int>B) {
+ int solution(std::vector<int> &A, std::vector<int> &B) {
         int count = 0;
-        for(int index = 0; index < A.size(); index++){
+        for(unsigned int index = 0; index < A.size(); index++){
             if(A[index] == B[index]) 
                 count++;
             else if(A[index] == 1 || B[index] == 1)
@@ -47,10 +48,3 @@ bool isdiv(int num, int g){
         
         return count;
     }
-    
-int main(){
-    std::vector<int> A = {15, 10, 3};
-    std::vector<int> B = {75, 30, 5};
-    int count = prime_diviors(A, B);
-    std::cout<<count<<" pair(s) have common prime diviors"<<std::endl;
-}

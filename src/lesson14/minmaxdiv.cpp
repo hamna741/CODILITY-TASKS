@@ -1,41 +1,35 @@
-#include<iostream>
-#include <vector>
+#include<vector>
 #include <algorithm>
-
-using namespace std;
-
-int solution(int K, int M, vector<int> &A) {
+#include<numeric>
+int solution(int K, int M, std::vector<int> &A) {
     int N = A.size();
-    int max_sum = M * N; 
-    int min_sum = 1; 
-    while (min_sum < max_sum) {
-        int mid_sum = (min_sum + max_sum) / 2;
-        int count = 1; 
-        int curr_sum = 0; 
+    int max_elem = *max_element(A.begin(), A.end());
+    int sum_elems = std::accumulate(A.begin(), A.end(), 0);
+    int left = max_elem; //minium possible sum
+    int right = sum_elems;
+    int result = right;
+    while (left <= right) {
+        int mid = (left + right) / 2;
+        int num_of_blocks = 1;
+        int block_sum = 0;
         for (int i = 0; i < N; i++) {
-            if (curr_sum + A[i] > mid_sum) {
-                count++; 
-                curr_sum = A[i];
+            if (A[i] > mid) {
+                num_of_blocks = K + 1;
+                break;
+            }
+            if (block_sum + A[i] > mid) {
+                num_of_blocks++;
+                block_sum = A[i];
             } else {
-                curr_sum += A[i];
+                block_sum += A[i];
             }
         }
-        if (count <= K) {
-            max_sum = mid_sum; 
+        if (num_of_blocks <= K) {
+            result = mid; 
+            right = mid - 1; //dec max sum
         } else {
-            min_sum = mid_sum + 1; 
+            left = mid + 1;
         }
     }
-    return min_sum;
-}
-int main() {
-    vector<int> A = {2, 1, 5, 1, 2, 2, 2};
-    int K = 3;
-    int M = 5;
-
-    int result = solution(K, M, A);
-
-    cout << result << endl;
-
-    return 0;
+    return result;
 }

@@ -1,52 +1,59 @@
-#include<iostream>
+// you can use includes, for example:
+// #include <algorithm>
+
+// you can write to stdout for debugging purposes, e.g.
+// cout << "this is a debug message" << endl;
 #include<vector>
-#include<algorithm>
-#include <bits/stdc++.h>
-std::vector<int> genome(std::string s,std::vector<int> &p,std::vector<int> &Q){
-std::vector<int> result;
-    int N = s.size(), M = p.size();
-
-    for (int i = 0; i < M; i++) {
-        int start = p[i], end = Q[i];
-        int min_impact_factor = 4;
-
-        for (int j = p[i]; j <= Q[i]; j++) {
-            int impact_factor;
-            if (s[j]=='A') 
-               
-                    impact_factor = 1;
-                   if (s[j]=='C')
-                    impact_factor = 2;
-                    if (s[j]=='G')
-                    impact_factor = 3;
-                   if (s[j]=='T')
-                    impact_factor = 4;
+#include <string>
+#include<iostream>
+int getImpact(char nucleotide) {
+    switch (nucleotide) {
+        case 'A':
+            return 0;
+        case 'C':
+            return 1;
+        case 'G':
+            return 2;
+        case 'T':
+            return 3;
+        default:
+            return -1;
     
-        
-            if (impact_factor < min_impact_factor) {
-                min_impact_factor = impact_factor;
-        
-        }
-        }
+    }
+}
+std::vector<int> solution(std::string &S, std::vector<int> &P, std::vector<int> &Q) {
+    int N = S.size();
+    std::vector<int> result(P.size());
+   std:: vector<std::vector<int>> prefix_sum(N, std::vector<int>(4, 0));
+    prefix_sum[0][getImpact(S[0])]++;
 
-        result.push_back(min_impact_factor);
+    for (int i = 1; i < N; i++) { //for each P-Q range
+        prefix_sum[i][0] = prefix_sum[i-1][0];
+        prefix_sum[i][1] = prefix_sum[i-1][1];
+        prefix_sum[i][2] = prefix_sum[i-1][2];
+        prefix_sum[i][3] = prefix_sum[i-1][3];
+        prefix_sum[i][getImpact(S[i])]++;
+    }
+
+    for (unsigned int i = 0; i < P.size(); i++) {
+        int start = P[i];
+        int end = Q[i];
+        int count =0;
+        for (int j = 0; j < 4; j++) {
+            if (start>0)
+            {
+                count=prefix_sum[end][j]-prefix_sum[start-1][j];
+                }
+            else
+                count=prefix_sum[end][j];
+            
+          
+            if (count > 0) {
+                result[i] = j + 1;
+                break;
+            }
+        }
     }
 
     return result;
 }
-
-int main(int argc, char* argv[]){
- 
-
-std:: vector<int> P={2,5,0};
-std:: vector<int> Q={4,5,6};
-std::string S="CAGCCTA";
-for(auto val:genome(S,P,Q))
-std::cout<<val<<" ";
-std::cout<<std::endl;
-  
-    return 0;
-
-}
-
-

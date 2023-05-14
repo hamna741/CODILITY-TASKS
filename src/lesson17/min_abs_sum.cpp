@@ -1,43 +1,60 @@
-#include<iostream>
+// you can use includes, for example:
+// #include <algorithm>
+
+// you can write to stdout for debugging purposes, e.g.
+// cout << "this is a debug message" << endl;
+#include <algorithm>
+#include<climits>
+#include <numeric>
 #include <vector>
-#include <set> 
-#include<math.h>
 
+int solution(std::vector<int> &A)                                                    
+{      
+  if (A.size()== 0)
+			return 0;
+		if (A.size()== 1)
+			return A[0];
 
+		int sum = 0;
+		int maximum = A[0];
 
-int min_sum(std::vector<int> &vec) {
-   
-    if (vec.size() == 0) return 0;
+		for (unsigned int i = 0; i < A.size(); i++) {
+			A[i] = std::abs(A[i]);
+			sum += A[i];
+			maximum = std::max(A[i], maximum);
+		}
+std::vector<int>count(maximum+1);
+	
+		for (int num : A) {
+         
+			count[num]++;
+		}
+  
+std::vector<int>dp(sum+1,-1);
 
-    std::set<int> sum, tmpSums;        
-    sum.insert(abs(vec[0]));
-    for (auto it = vec.begin()+1 ; it != vec.end(); ++it)
-    {        
-        for (auto val : sum)
-        {
-            tmpSums.insert(abs(val + abs(*it)));
-            tmpSums.insert(abs(val - abs(*it)));            
-        }
-        sum = tmpSums;
-        tmpSums.clear();
-    }
+	
 
-  return *sum.begin();
-}
+		dp[0] = 0;
 
-int main(int argc, char* argv[]){
-      std::vector<int> vec;
-    if(argc<2){
-        std::cout<<"INVALID INPUT!!";
-        return 1;
-    }
-    else{
-          for (int i = 1; i < argc; i++) {
-        int num = atoi(argv[i]); 
-        vec.push_back(num); 
-    }
-   
-     std::cout<<"MINIMUM ABSOLUTE SUM = "<<min_sum(vec)<<std::endl;
-}
+		for (int i = 0; i <= maximum; i++) {
+			if (count[i] > 0) { //value is present in A
+				for (int val = 0; val <= sum; val++) {
+					if (dp[val] >= 0)
+						dp[val] = count[i];
+					else if (val >= i && dp[val - i] > 0) {
+						dp[val] = dp[val - i] - 1;
+					}
+                   
+               
+				}
+               
+			}
+		}
 
+		int result = sum;
+		for (int i = 0; i <= sum / 2; i++) {
+			if (dp[i] >= 0)
+				result = std::min(result, sum - (2 * i));
+		}
+		return result;                                                           
 }

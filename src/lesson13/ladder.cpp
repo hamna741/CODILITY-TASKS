@@ -1,40 +1,36 @@
-#include<iostream>
-#include <vector>
+// you can use includes, for example:
+// #include <algorithm>
+
+// you can write to stdout for debugging purposes, e.g.
+// cout << "this is a debug message" << endl;
+
 #include <cmath>
 
-using namespace std;
-
-vector<int> solution(vector<int> &A, vector<int> &B) {
+#include<vector>
+std::vector<int> solution(std::vector<int> &A, std::vector<int> &B) {
     int max_rungs = 0;
-    for (int i = 0; i < A.size(); i++) {
-        max_rungs = max(max_rungs, A[i]);
+    for (unsigned int i = 0; i < A.size(); i++) {
+        max_rungs = std::max(max_rungs, A[i]);
     }
     int max_power = 0;
-    for (int i = 0; i < B.size(); i++) {
-        max_power = max(max_power, B[i]);
+    for (unsigned int i = 0; i < B.size(); i++) {
+        max_power =std:: max(max_power, B[i]);
     }
     int mod = pow(2, max_power);
-    vector<int> fib(max_rungs+1);
+    std::vector<int> fib(max_rungs+1);
     fib[0] = 1;
     fib[1] = 1;
     for (int i = 2; i <= max_rungs; i++) {
-        fib[i] = (fib[i-1] + fib[i-2]) % mod;
-        std::cout<<fib[i];
+        fib[i] = (fib[i-1] + fib[i-2]) % mod; //corresponding to one step and two steps
+       
     }
-    std::cout<<std::endl;
-    vector<int> result;
-    for (int i = 0; i < A.size(); i++) {
-        std::cout<<fib[A[i]];
+ 
+    std::vector<int> result;
+    for (unsigned int i = 0; i < A.size(); i++) {
+      
         result.push_back(fib[A[i]] % (int) pow(2, B[i]));
     }
-    std::cout<<std::endl;
-    for(auto val: result)
-    std::cout<<val;
+  
+   
     return result;
-}
-int main(){
-    std::vector<int> vec1{4,4,5,5,1};
-    std::vector<int> vec2{3,2,4,3,1} ;
-    solution(vec1,vec2);
-    return 0;
 }

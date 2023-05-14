@@ -1,15 +1,16 @@
-#include<iostream>
-#include<cmath>
-#include <algorithm>
+// you can use includes, for example:
+// #include <algorithm>
+
+// you can write to stdout for debugging purposes, e.g.
+// cout << "this is a debug message" << endl;
 #include<climits>
 #include<vector>
+#include<iostream>
+int solution(std::vector<int> &A) {
+    int sum = 0;
 
-
-int Tape(std::vector<int> &A){
-   int sum = 0;
-   int mindif;
    int diff;
-    for (int i = 0; i < A.size(); i++) {
+    for (unsigned int i = 0; i < A.size(); i++) {
         sum += A[i];
     }
     
@@ -17,7 +18,7 @@ int Tape(std::vector<int> &A){
     int rightSum = sum;
     int minDiff = INT_MAX;
     
-    for (int i = 0; i < A.size() - 1; i++) {
+    for (unsigned int i = 0; i < A.size() - 1; i++) {
         leftSum += A[i];
         
         rightSum -= A[i];
@@ -28,24 +29,4 @@ int Tape(std::vector<int> &A){
     }
   
     return minDiff;
-}
-
-int main(int argc, char* argv[]){
-    if(argc<2){
-        std::cout<<"INVALID INPUT!!";
-        return 1;
-    }
-    else{
-
-std:: vector<int> vec;
-    for (int i = 1; i < argc; i++) {
-        int num = atoi(argv[i]); 
-        vec.push_back(num); 
-    }
-   
-    int minDiff = Tape(vec);
-    std::cout<<" min difference = "<<minDiff<<std::endl;
-  
-    return 0;
-}
 }

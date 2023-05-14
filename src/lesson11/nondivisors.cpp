@@ -1,50 +1,54 @@
-#include <iostream>
 #include <vector>
+#include <unordered_map>
 #include <algorithm>
-#include <bits/stdc++.h>
-
-std::vector<int> divisor(std::vector<int> &vec)
-{
-    std::vector<int> result;
+int divisors(int num, std::unordered_map<int, int>& occur_count) {
     int count = 0;
-    for (int index = 0; index < vec.size(); index++)
-    {
-        count = 0;
-        for (int index2 = 0; index2 < vec.size(); index2++)
-        {
-            if (index != index2 && vec[index] % vec[index2] != 0)
-                count++;
+    
+    for(int div = 1;div * div <= num;div++) {
+        if (num % div == 0) { 
+            if (occur_count[num/div] > 0) {
+                count += occur_count[num/div];
+            }
+            if (num/div != div && occur_count[div] > 0) {
+                count += occur_count[div];
+            }
         }
+        
+    }
+    return count;
+}
+std::vector<int> solution(std::vector<int>& A) {
+  
+    if (A.size() < 1 || A.size() > 50000) throw std::invalid_argument("Bad input");
 
-        result.push_back(count);
+    std::unordered_map<int, int> occur_count;
+    std::vector<int> keys;
+    for (int i = 0; i < A.size(); ++i) {
+        
+        int uniqueCount = occur_count[A[i]];
+        if (uniqueCount > 0) {
+            occur_count[A[i]] = uniqueCount + 1;
+        } else {
+            occur_count[A[i]] = 1;
+            keys.push_back(A[i]);
+        }
     }
 
-    return result;
+    std::sort(keys.begin(), keys.end());
+
+    for (int index = keys.size() - 1; index >= 0; --index) {
+        int num = keys[index];
+        int divisorCount = divisors(num, occur_count);
+
+        int nonDivisorCount = A.size() - divisorCount;
+        occur_count[num] = nonDivisorCount;
+    }
+
+    for (int index = 0; index < A.size(); ++index) {
+        int num = A[index];
+        A[index] = occur_count[num];
+    }
+    return A;
 }
 
-int main(int argc, char *argv[])
-{
 
-    if (argc < 2)
-    {
-        std::cout << "INVALID INPUT!!";
-        return 1;
-    }
-    else
-    {
-
-        std::vector<int> vec;
-
-        for (int i = 1; i < argc; i++)
-        {
-            int num = atoi(argv[i]);
-            vec.push_back(num);
-        }
-         std::cout<<"NUMBER OF PAIRS: "<<std::endl;
-     for(auto val: divisor(vec))
-     std::cout<<val;
-std::cout<<std::endl;
-        //  std::cout<<"NUMBER OF PAIRS: "<<divisor(vec)<<std::endl;
-    }
-    return 0;
-}

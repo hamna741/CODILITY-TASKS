@@ -1,15 +1,14 @@
-#include <iostream>
+// you can use includes, for example:
+// #include <algorithm>
 #include <numeric>
-#include <vector>
-
-
-    bool isNailed(int nail, const std:: vector<int> &A, const std::vector<int> &B, const std::vector<int> &C)
+#include<vector>
+// you can write to stdout for debugging purposes, e.g.
+// cout << "this is a debug message" << endl;
+   bool isNailed(int nail, const std:: vector<int> &A, const std::vector<int> &B, const std::vector<int> &C)
     {
-        const int N = A.size();
-        const int M = C.size();
+      
 
-
-        std::vector<int> nails(2*M+1, 0);
+        std::vector<int> nails(2*C.size()+1, 0);
         
         for (int i = 0; i < nail; i++)
         {
@@ -20,7 +19,7 @@
         std::partial_sum(nails.begin(), nails.end(), nails.begin());
 
         bool nailed = true;
-        for (int i = 0; (i < N) && nailed; i++)
+        for (unsigned int i = 0; (i < A.size()) && nailed; i++)
         {
             nailed = (nails[B[i]] - nails[A[i]-1]) > 0;
         }
@@ -49,11 +48,3 @@
 
         return result;
     }
-int main(){
-std::vector<int> A={1,4,5,8};
-std::vector<int> B={4,5,9,10};
-std::vector<int> C={4,6,7,10,2};
-std::cout<<"MAXIMUM NUMBER OF NAILS = "<<solution(A,B,C)<<std::endl;
-
-
-}

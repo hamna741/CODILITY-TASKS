@@ -1,14 +1,15 @@
-#include<iostream>
+// you can use includes, for example:
+// #include <algorithm>
+
+// you can write to stdout for debugging purposes, e.g.
+// cout << "this is a debug message" << endl;
 #include<vector>
-#include<algorithm>
-#include <bits/stdc++.h>
-int sum(std::vector<int> &vec){
- int N = vec.size();
- 
+int solution(std::vector<int> &A) {
+      
   std::vector<int> peaks;
 
-    for (int index = 1; index < vec.size()- 1; index++) {
-        if (vec[index] > vec[index-1] && vec[index] > vec[index+1]) {
+    for (int index = 1; index < A.size()- 1; index++) {
+        if (A[index] > A[index-1] && A[index] > A[index+1]) {
             peaks.push_back(index);
         }
     }
@@ -35,28 +36,3 @@ int sum(std::vector<int> &vec){
     
     return maxFlags;
 }
-
-
-
-int main(int argc, char* argv[]){
-     if(argc<1){
-        std::cout<<"INVALID INPUT!!";
-        return 1;
-    }
-    else{
-
-std:: vector<int> vec;
-
-    for (int i = 0; i < argc; i++) {
-        int num = atoi(argv[i]); 
-        vec.push_back(num); 
-       
-    }
- int max_flags = sum(vec);
-    std::cout<<"NUMBER OF FLAGS: "<<max_flags<<std::endl;
-    }
-    return 0;
-
-}
-
-

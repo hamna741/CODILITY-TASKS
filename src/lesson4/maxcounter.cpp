@@ -1,44 +1,32 @@
-#include<iostream>
+// you can use includes, for example:
+// #include <algorithm>
+
+// you can write to stdout for debugging purposes, e.g.
+// cout << "this is a debug message" << endl;
+#include <algorithm>
 #include<vector>
-int maxcount(std::vector<int> &vec,int N){
-   int counter[N]={0};
-   int max=0;
+#include<iostream>
 
- 
-for(int index=0;index<vec.size();index++){
-  
-if(vec[index]<N){
-
-counter[vec[index]]++;
-}
-else{
-    
-    for(int index=0; index<N;index++)
-    if(counter[index]>max)
-    max=counter[index];
-    for(int index=0; index<N;index++)
-    counter[index]=max;
-}
-for(int i=0; i<N;i++)
-std::cout<<counter[i];
-std::cout<<std::endl;
-}
-return 0;
-}
-int main(int argc, char* argv[]){
-     if(argc<2){
-        std::cout<<"INVALID INPUT!!";
-        return 1;
+std::vector<int> solution(int N, std::vector<int>& A) {
+    std::vector<int> counters(N, 0);
+    int current_max = 0;
+    int last_max = 0;
+    for (unsigned int i = 0; i < A.size(); i++) {
+      
+        if (A[i]>= 1 && A[i] <= N) {
+            counters[A[i]-1]++;
+            current_max = std::max(current_max, counters[A[i]-1]);
+        } else if (A[i] == N+1) {
+            if (current_max > last_max) {
+                std::fill(counters.begin(), counters.end(), current_max);
+                last_max = current_max;
+            }
+        }
     }
-    else{
-
-std:: vector<int> vec;
-int counters=atoi(argv[1]);
-    for (int i = 2; i < argc; i++) {
-        int num = atoi(argv[i]); 
-        vec.push_back(num); 
+    for (int i = 0; i < N; i++) {
+        if (counters[i] < last_max) {
+            counters[i] = last_max;
+        }
     }
-    maxcount(vec,counters);
-    }
-    return 0;
+    return counters;
 }

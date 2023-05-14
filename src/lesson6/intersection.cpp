@@ -1,12 +1,12 @@
-#include<iostream>
-#include<vector>
-#include<algorithm>
-#include <bits/stdc++.h>
-#include <algorithm>
+// you can use includes, for example:
+// #include <algorithm>
 
-int cars(std::vector<int> &A){
- 
-    std::vector<int> left(A.size()), right(A.size());
+// you can write to stdout for debugging purposes, e.g.
+// cout << "this is a debug message" << endl;
+ #include <algorithm>
+ #include<vector>
+int solution(std::vector<int> &A) {
+     std::vector<int> left(A.size()), right(A.size());
     for (int i = 0; i < A.size(); i++) {
         left[i] = i - A[i];
         right[i] = i + A[i];
@@ -24,24 +24,4 @@ int cars(std::vector<int> &A){
         }
     }
     return intersections;
-}
-
-int main(int argc, char* argv[]){
-     if(argc<2){
-        std::cout<<"INVALID INPUT!!";
-        return 1;
-    }
-    else{
-
-std:: vector<int> vec;
-int counters=atoi(argv[1]);
-    for (int i = 1; i < argc; i++) {
-        int num = atoi(argv[i]); 
-        vec.push_back(num); 
-    }
-
-    std::cout<<"NUMBER OF PAIRS: "<<cars(vec)<<std::endl;
-    }
-    return 0;
-
 }

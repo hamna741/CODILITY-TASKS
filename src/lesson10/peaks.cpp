@@ -1,27 +1,28 @@
+// you can use includes, for example:
+// #include <algorithm>
 
-
-#include<iostream>
+// you can write to stdout for debugging purposes, e.g.
+// cout << "this is a debug message" << endl;
 #include<vector>
+int solution(std::vector<int> &A) {
+     std::vector<int> peaks;
 
-int sum(std::vector<int> &vec){
-    std::vector<int> peaks;
-
-    for (int index = 1; index < vec.size()- 1; index++) {
-        if (vec[index] > vec[index-1] && vec[index] > vec[index+1]) {
+    for (unsigned int index = 1; index < A.size()- 1; index++) {
+        if (A[index] > A[index-1] && A[index] > A[index+1]) {
             peaks.push_back(index);
         }
 
     }
 
     
-    for(int size = 1; size <= vec.size(); size++){
-      if(vec.size() % size != 0) 
+    for(unsigned int size = 1; size <= A.size(); size++){
+      if(A.size() % size != 0) 
       continue; //equal size of subarrays
       int g_count = 0;
-      int groups = vec.size()/size;
+      int groups = A.size()/size;
       bool ok = true;
      
-      for(int p_index=0;p_index<peaks.size();p_index++){
+      for(unsigned int p_index=0;p_index<peaks.size();p_index++){
        
         if(peaks[p_index]/size > g_count){
           ok = false;
@@ -34,29 +35,4 @@ int sum(std::vector<int> &vec){
       if(g_count != groups) ok = false;
       if(ok) return groups;
     }
-    return 0;
-  }
-
-
-int main(int argc, char* argv[]){
-     if(argc<1){
-        std::cout<<"INVALID INPUT!!";
-        return 1;
-    }
-    else{
-
-std:: vector<int> vec;
-
-    for (int i = 1; i < argc; i++) {
-        int num = atoi(argv[i]); 
-        vec.push_back(num); 
-       
-    }
- int max_arr= sum(vec);
-;
-    std::cout<<"NUMBER OF SUBARRAYS "<<max_arr<<std::endl;
-    }
-    return 0;
-
-}
-    
+    return 0;}

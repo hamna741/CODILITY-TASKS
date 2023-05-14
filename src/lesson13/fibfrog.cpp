@@ -1,9 +1,9 @@
+// you can use includes, for example:
+// #include <algorithm>
 
+// you can write to stdout for debugging purposes, e.g.
+// cout << "this is a debug message" << endl;
 #include<vector>
-#include<iostream>
-
-
-
 std::vector<int> fibonacci(int MaxNum) {
     if (MaxNum == 0)
         return std::vector<int>(1, 0);
@@ -16,8 +16,7 @@ std::vector<int> fibonacci(int MaxNum) {
     // std::cout<<std::endl;
     return fib;
 }
-
-int frog(std::vector<int>& A) {
+int solution(std::vector<int> &A) {
     int N = A.size();
     if (N == 0)
         return 1;
@@ -35,9 +34,9 @@ int frog(std::vector<int>& A) {
         if (A[pos] == 0)
             continue;
 
-        for (int i = fib.size()-1; i >= 0; i--) {
-            if (pos + fib[i] < N && A[pos + fib[i]]) {
-                jumps[pos + fib[i]] = std::min(jumps[pos]+1, jumps[pos + fib[i]]);
+        for (int index = fib.size()-1; index >= 0; index--) {
+            if (pos + fib[index] < N && A[pos + fib[index]]) {
+                jumps[pos + fib[index]] = std::min(jumps[pos]+1, jumps[pos + fib[index]]);
             }
         }
     }
@@ -45,11 +44,4 @@ int frog(std::vector<int>& A) {
         return jumps[N - 1];
     }
     return -1;
-}
-
-int main() {
-    std::vector<int> A = {0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0};
-    int min_jumps = frog(A);
-    std::cout << "Minimum number of jumps: " << min_jumps << std::endl;
-    return 0;
 }
