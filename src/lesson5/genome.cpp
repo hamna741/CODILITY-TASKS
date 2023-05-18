@@ -46,7 +46,7 @@ std::vector<int> solution(std::string &S, std::vector<int> &P, std::vector<int> 
         std::cout << std::endl;
     }
 
-    for (unsigned int i = 0; i < P.size(); i++)  //p={2, 5, 0}; q={4, 5, 6};
+    for (unsigned int i = 0; i < P.size(); i++) // p={2, 5, 0}; q={4, 5, 6};
     {
 
         int count = 0;
@@ -75,7 +75,7 @@ int main()
     std::string s = "CAGCCGTA";
     std::vector<int> P = {2, 5, 0};
     std::vector<int> Q = {5, 5, 6};
-    
+
     for (auto val : solution(s, P, Q))
         std::cout << val;
 }
