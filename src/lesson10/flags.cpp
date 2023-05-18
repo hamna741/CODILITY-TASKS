@@ -4,7 +4,7 @@
 // you can write to stdout for debugging purposes, e.g.
 // cout << "this is a debug message" << endl;
 #include <vector>
-#include<iostream>
+#include <iostream>
 int solution(std::vector<int> &A)
 {
 
