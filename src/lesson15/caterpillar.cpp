@@ -5,6 +5,7 @@
 // cout << "this is a debug message" << endl;
 #include<vector>
 #include <algorithm>
+#include<iostream>
 int solution(std::vector<int> &A) {
      std::sort(A.begin(), A.end());
    
@@ -20,4 +21,8 @@ int solution(std::vector<int> &A) {
         }
     }
     return min_abs_sum;
+}
+int main(){
+    std::vector<int>A={1,4,-3};
+    std::cout<<solution(A)<<std::endl;
 }

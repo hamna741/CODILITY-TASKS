@@ -27,3 +27,7 @@ std::vector<int> K2(A.size(),0);
 
   return max;
 }
+int main(){
+    std::vector<int>A={3,2,6,-1,4,5,-1,2};
+    std::cout<<solution(A)<<std::endl;
+}

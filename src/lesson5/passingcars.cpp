@@ -1,5 +1,5 @@
 #include<vector>
-
+#include<iostream>
 int solution(std::vector<int> &A) {
     int east = 0, pairs = 0;
     for (int i = 0; i < A.size(); i++) {
@@ -13,4 +13,8 @@ int solution(std::vector<int> &A) {
         }
     }
     return pairs;
+}
+int main(){
+    std::vector<int>A={0,1,0,1,1};
+    std::cout<<solution(A);
 }

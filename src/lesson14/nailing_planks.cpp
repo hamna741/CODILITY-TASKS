@@ -2,6 +2,7 @@
 // #include <algorithm>
 #include <numeric>
 #include<vector>
+#include<iostream>
 // you can write to stdout for debugging purposes, e.g.
 // cout << "this is a debug message" << endl;
    bool isNailed(int nail, const std:: vector<int> &A, const std::vector<int> &B, const std::vector<int> &C)
@@ -48,3 +49,12 @@
 
         return result;
     }
+
+    
+int main(){
+    
+ std::vector<int>P={1,4,5,8};
+std::vector<int>Q={4,5,9,10};
+std::vector<int>R={4,6,7,10,2};
+ std::cout<<solution(P,Q,R);
+}

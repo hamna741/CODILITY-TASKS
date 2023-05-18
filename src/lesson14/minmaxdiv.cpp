@@ -1,6 +1,7 @@
 #include<vector>
 #include <algorithm>
 #include<numeric>
+#include<iostream>
 int solution(int K, int M, std::vector<int> &A) {
     int N = A.size();
     int max_elem = *max_element(A.begin(), A.end());
@@ -33,3 +34,10 @@ int solution(int K, int M, std::vector<int> &A) {
     }
     return result;
 }
+int main(){
+    int k=3;
+    int m =5;
+ std::vector<int>P={2,1,5,1,2,2,2};
+ std::cout<<solution(k,m,P);
+}
+

@@ -1,6 +1,7 @@
 #include <vector>
 #include <unordered_map>
 #include <algorithm>
+#include<iostream>
 int divisors(int num, std::unordered_map<int, int>& occur_count) {
     int count = 0;
     
@@ -52,3 +53,10 @@ std::vector<int> solution(std::vector<int>& A) {
 }
 
 
+
+  int main(){
+    std::vector<int>A={3,1,2,3,6};
+    for(auto val:solution(A))
+    std::cout<<val;
+    std::cout<<std::endl;
+}
