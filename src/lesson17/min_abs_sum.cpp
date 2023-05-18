@@ -24,6 +24,7 @@ int solution(std::vector<int> &A)
 		sum += A[i];
 		maximum = std::max(A[i], maximum);
 	}
+
 	std::vector<int> count(maximum + 1);
 
 	for (int num : A)
@@ -32,30 +33,33 @@ int solution(std::vector<int> &A)
 		count[num]++;
 	}
 
-	std::vector<int> dp(sum + 1, -1);
+	std::vector<int> OccurancesOfNum(sum + 1, -1);
 
-	dp[0] = 0;
+	OccurancesOfNum[0] = 0;
 
 	for (int i = 0; i <= maximum; i++)
 	{
 		if (count[i] > 0)
-		{ // value is present in A
-			for (int val = 0; val <= sum; val++)
+		{										 // value is present in A
+			for (int val = 0; val <= sum; val++) // all possible sums
 			{
-				if (dp[val] >= 0)
-					dp[val] = count[i];
-				else if (val >= i && dp[val - i] > 0)
+				if (OccurancesOfNum[val] >= 0)
+					OccurancesOfNum[val] = count[i];			   // new value of sum
+				else if (val >= i && OccurancesOfNum[val - i] > 0) // OccurancesOfNum[val-i]-->remaining sum
 				{
-					dp[val] = dp[val - i] - 1;
+					OccurancesOfNum[val] = OccurancesOfNum[val - i] - 1; //-1 --> one less occurance of i
 				}
 			}
+			for (auto val : OccurancesOfNum)
+				std::cout << val;
+			std::cout << std::endl;
 		}
 	}
 
 	int result = sum;
 	for (int i = 0; i <= sum / 2; i++)
 	{
-		if (dp[i] >= 0)
+		if (OccurancesOfNum[i] >= 0)
 			result = std::min(result, abs(i - (sum - i)));
 	}
 	return result;
