@@ -5,7 +5,7 @@
 #include<iostream>
 // you can write to stdout for debugging purposes, e.g.
 // cout << "this is a debug message" << endl;
-   bool isNailed(int nail, const std:: vector<int> &A, const std::vector<int> &B, const std::vector<int> &C)
+   bool nailed_check(int nail, const std:: vector<int> &A, const std::vector<int> &B, const std::vector<int> &C)
     {
       
 
@@ -19,13 +19,13 @@
 
         std::partial_sum(nails.begin(), nails.end(), nails.begin());
 
-        bool nailed = true;
-        for (unsigned int i = 0; (i < A.size()) && nailed; i++)
+        bool is_nailed = true;
+        for (unsigned int i = 0; (i < A.size()) && is_nailed; i++)
         {
-            nailed = (nails[B[i]] - nails[A[i]-1]) > 0;
+            is_nailed = (nails[B[i]] - nails[A[i]-1]) > 0;
         }
 
-        return nailed;
+        return is_nailed;
     }
 
 
@@ -38,7 +38,7 @@
         while (minNails <= maxNails)
         {
             int mid = (minNails + maxNails) / 2;
-            if (isNailed(mid, A, B, C))
+            if (nailed_check(mid, A, B, C))
             {
                 maxNails = mid - 1;
                 result = mid;
