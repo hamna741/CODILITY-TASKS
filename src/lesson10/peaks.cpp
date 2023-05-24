@@ -8,7 +8,9 @@
 int solution(std::vector<int> &A)
 {
   std::vector<int> peaks;
-
+int g_count=0;
+int groups=0;
+bool ok;
   for (unsigned int index = 1; index < A.size() - 1; index++)
   {
     if (A[index] > A[index - 1] && A[index] > A[index + 1])
@@ -17,13 +19,15 @@ int solution(std::vector<int> &A)
     }
   }
 
-  for (unsigned int size = 1; size <= A.size(); size++)
+  for (unsigned int size = 1; size <= A.size(); size++)   //peaks =[3 5 10]
   {
+    if(peaks.empty())
+      break;
     if (A.size() % size != 0)
       continue; // equal size of subarrays
-    int g_count = 0;
-    int groups = A.size() / size;
-    bool ok = true;
+     g_count = 0;
+     groups = A.size() / size;
+     ok = true;
 
     for (unsigned int p_index = 0; p_index < peaks.size(); p_index++)
     {
@@ -34,14 +38,18 @@ int solution(std::vector<int> &A)
         break;
       }
       if (peaks[p_index] / size == g_count)
-        g_count++;
+          g_count++;
+      
     }
     if (g_count != groups)
       ok = false;
-    if (ok)
-      return groups;
+    if (ok){
+      break;
+   
+    }
+  
   }
-  return 0;
+  return groups;
 }
 
 int main()
